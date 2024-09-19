@@ -8,20 +8,19 @@ About (privileged) intents and public bots
 ==========================================
 
 This page aims to explain Red's current intents requirements,
-our stance regarding "public bots" and the impact of some announced
-Discord changes coming in April 2022.
+our stance regarding "public bots".
 
 To clarify:
 
 - **Small bots** are bots under 100 servers. They currently do not need to undergo Discord's
   bot verification process
 - **Public bots** (or big bots) are bots that have reached 100 servers. They need to be
-  `verified <https://support.discord.com/hc/en-us/articles/360040720412-Bot-Verification-and-Data-Whitelisting>`_
+  `verified <https://support-dev.discord.com/hc/en-us/articles/23926564536471-How-Do-I-Get-My-App-Verified>`_
   by Discord to join more than 100 servers and gain privileged intents
 
 .. warning::
 
-  It is **very** important that you fully read this page if you're the owner of a public bot or strive to scale your bot at that level.
+  It is **very** important that you fully read this page if you're the owner of a public bot or strive to scale your bot to that level.
 
 .. _intents-intents:
 
@@ -104,8 +103,8 @@ Message intent and slash commands
 
   If you own a public bot it is extremely important that you read this section.
 
-Discord has announced that **starting April 2022** the content of users' messages
-`will be "locked" behind message intent <https://support-dev.discord.com/hc/en-us/articles/4404772028055>`_ |br|
+Since **August 2022** the content of users' messages
+`has been "locked" behind message intent <https://support-dev.discord.com/hc/en-us/articles/4404772028055>`_ |br|
 If you're the owner of a small bot, fear not, this is yet another box that you have to tick from the
 `Discord development portal <https://discord.com/developers/applications/me>`_. |br|
 But if you're the owner of a public bot, things might be a lot less pleasant.
@@ -123,12 +122,12 @@ The *bandaid fix* is for you to change your bot's prefix to a mention and a good
 still work. You will however lose many functions, namely anything that relies on seeing message content to act. |br|
 The more *proper fix* is also not easy. You will need to justify your need for the message intent to Discord and
 they will only accept "compelling use cases".
-`It is not known what those even entail <https://gist.github.com/spiralw/091714718718379b6efcdbcaf807a024#q-what-usecases-will-be-valid>`_ at this point, but they have already stated that "parsing commands" is not a valid justification. |br|
-To make the matter worse, Discord is making `a huge push for all bot developers to implement slash commands <https://support.discord.com/hc/en-us/articles/1500000368501-Slash-Commands-FAQ>`_, which at the moment
-are rather lacking in features and cannot cover all the functionalities that standard commands offer. |br|
-Discord staff
-`stated that they will want your bot to have slash commands when you ask for message intent <https://gist.github.com/spiralw/091714718718379b6efcdbcaf807a024#q-if-we-are-granted-this-intent-will-bots-be-sanctioned-if-they-use-it-for-their-own-use-case-but-also-to-continue-to-run-normal-non-slash-commands-or-do-we-assume-that-if-you-are-granted-the-intent-you-are-trusted-with-it-and-are-allowed-to-use-it-for-additional-uses>`_. |br|
-Slash commands might very well turn out to be a big undertaking for the Red team to implement, even more now that our
-underlying library, `discord.py <https://github.com/Rapptz/discord.py>`_, has been discontinued. |br|
-The time window that Discord is giving us to adapt is very narrow: **Red will likely not be able to support slash
-commands for April 2022** and you should plan accordingly.
+`See discord's offical guide on this topic <https://support-dev.discord.com/hc/en-us/articles/5324827539479-Message-Content-Intent-Review-Policy>`_
+for some examples of compelling use cases, but they have already stated that "parsing commands" is not a valid justification. |br|
+To make the matter worse, Discord is making `a huge push for all bot developers to implement slash commands
+<https://support.discord.com/hc/en-us/articles/1500000368501-Slash-Commands-FAQ>`_, which
+cannot cover all the functionalities that standard commands offer. |br|
+Discord staff stated that they will want your bot to have slash commands when you ask for message intent and
+`has measures in place to if you attempt to mislead them into getting the intent <https://support-dev.discord.com/hc/en-us/articles/6027634717335-I-Received-the-Message-Content-Intent-for-Other-Functionality-Can-I-Use-Prefix-Commands>`_. |br|
+Currently, there are no plans for Red to use slash commands in any core cogs or commands. |br|
+However, Red does have support for slash commands through third-party cogs. See :doc:`this page<guide_slash_and_interactions>` for more information.
